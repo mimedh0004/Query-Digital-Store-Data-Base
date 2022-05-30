@@ -1,0 +1,45 @@
+Query 1
+Relation between Media Type and  Milliseconds
+select MediaType.Name,avg(Milliseconds)
+from MediaType
+join track
+on track.MediaTypeId=MediaType.MediaTypeId
+group by 1                                
+order by 2 DESC     
+Query2
+Relation between genres and Total Price
+select genre.Name,sum(InvoiceLine.unitprice*InvoiceLine.Quantity) AS TOTALPRICE
+from Track
+join Genre
+on track.GenreId=Genre.GenreId
+join InvoiceLine
+on invoiceline.TrackId=Track.TrackId
+group by 1 
+ORDER BY 2 DESC LIMIT 4
+Query 3
+Relation between customer name and quantity
+SELECT (Customer.FirstName ||" "|| customer.LastName) as customername,sum(invoiceline.quantity) AS Quantity
+FROM Customer
+JOIN Invoice
+ON INVOICE.CustomerId=customer.CustomerId
+join InvoiceLine
+on invoice.InvoiceId=invoiceline.InvoiceId
+group by customername
+order by 2  DESC
+limit 5
+Query 4
+Reltion between Playlist and invoices 
+SELECT Playlist.Name,count(Invoice.total) as invoices
+FROM Playlist
+JOIN PlaylistTrack
+ON Playlist.PlaylistId=PlaylistTrack.PlaylistId
+JOIN Track
+ON TRACK.TrackId=PlaylistTrack.TrackId
+JOIN InvoiceLine
+on InvoiceLine.TrackId=Track.TrackId
+JOIN Invoice
+ON Invoice.InvoiceId=InvoiceLine.InvoiceId
+group by 1
+order by 2 DESC
+                                                                                                                                                                                                 
+
